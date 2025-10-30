@@ -2,7 +2,7 @@
 FILE TOO BIG FOR RAM -- IT CRASHES
 A MODEL CAN USE BETWEEN 50K AND 100K FOR GOOD OUTPUT.
 '''
-
+'''
 # export part of the file
 import gzip
 
@@ -63,4 +63,37 @@ pd.set_option('display.max_colwidth', None)
 
 # check the shape and first few rows
 print(df.shape)
-print(df.head(25))
+print(df.head(50))
+'''
+
+import pandas as pd
+
+# === Load dataset ===
+file_path = "data/labeled_data.csv"   # adjust path as needed
+df = pd.read_csv(file_path)
+
+# === Inspect basic info ===
+print("Shape:", df.shape)
+print(df.head(10))
+
+# === Keep only relevant columns ===
+# The original columns are:
+# [count, hate_speech, offensive_language, neither, class, tweet]
+df = df[['tweet', 'class']].copy()
+
+# === Optional: map numeric classes to readable labels ===
+label_map = {
+    0: "hate_speech",
+    1: "offensive_language",
+    2: "neither"
+}
+df['label'] = df['class'].map(label_map)
+
+# === Display samples ===
+pd.set_option('display.max_colwidth', None)
+print("\nSample tweets:")
+print(df.sample(10))
+
+# === Basic stats ===
+print("\nLabel distribution:")
+print(df['label'].value_counts())
