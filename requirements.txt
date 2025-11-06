@@ -1,0 +1,15 @@
+fastapi
+asyncpg
+pydantic
+httpx
+loguru
+numpy
+pandas
+scikit-learn
+statsmodels
+tensorflow
+torch
+pydantic-settings
+aiohttp
+exchange_calendars
+transformers
